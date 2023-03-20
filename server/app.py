@@ -18,7 +18,7 @@ class MyForm(Flaskform):
 
 
 @app.route('/upload', methods=['POST'])
-def fileUpload():
+def formUpload():
 
     form = MyForm()
 
@@ -36,26 +36,30 @@ def fileUpload():
                 app.config['UPLOAD_PATH'],
                 secure_filename(file.filename)
             ))
+        
+        info = form.info_field.data
+        filename = form.name_field.data
+
+        regressors_list = info.rstrip('')
+        regressors_list = regressors_list.split(',')
+
+        filepath = r'E:/econ ml weba/econometric-ML-webapp/server/uploads'
+        new_filepath = filepath + filename
+
+        if '.csv' in filename:
+            data = pd.read_csv(new_filepath)
+        else:
+            data = pd.read_stata(new_filepath)
+
+        session['data'] = data
     
-    info = form.info_field.data
-    filename = form.name_field.data
-
-    regressors_list = info.rstrip('')
-    regressors_list = regressors_list.split(',')
-
-    filepath = r'E:/econ ml weba/econometric-ML-webapp/server/uploads'
-    new_filepath = filepath + filename
-
-    if '.csv' in filename:
-        data = pd.read_csv(new_filepath)
-    else:
-        data = pd.read_stata(new_filepath)
-    
-    return redirect('/')
+        return redirect('/')
 
 @app.route('/regress', methods = ['GET', 'POST'])
 
-def run_regression():
+def runRegression():
+    data = session.get('data', None)
+
 
 
 
