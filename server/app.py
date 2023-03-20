@@ -42,6 +42,7 @@ def formUpload():
 
         regressors_list = info.rstrip('')
         regressors_list = regressors_list.split(',')
+        session['regressors_list'] = regressors_list
 
         filepath = r'E:/econ ml weba/econometric-ML-webapp/server/uploads'
         new_filepath = filepath + filename
@@ -52,6 +53,7 @@ def formUpload():
             data = pd.read_stata(new_filepath)
 
         session['data'] = data
+        
     
         return redirect('/')
 
@@ -59,6 +61,13 @@ def formUpload():
 
 def runRegression():
     data = session.get('data', None)
+    regressors_list = session.get('regressors_list', None)
+
+    data = data[data.columns.intersection(regressors_list)]
+
+
+    
+
 
 
 
