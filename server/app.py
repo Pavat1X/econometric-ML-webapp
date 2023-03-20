@@ -50,10 +50,12 @@ def fileUpload():
         data = pd.read_csv(new_filepath)
     else:
         data = pd.read_stata(new_filepath)
-
+    
     return redirect('/')
 
 @app.route('/regress', methods = ['GET', 'POST'])
+
+def run_regression():
 
 
 
