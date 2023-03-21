@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>econ ml app</title>
+    </head>
+    <body>
+        <h1>econometric regressions using ML</h1>
+        <form name="input" method="POST" style="text-align: center;" 
+        enctype="multipart/form-data">
+        <label for="dataset">please upload a file</label>
+        <input type="file" id="dataset" name="dataset"><br><br>
+        <label for="response_var">please specify your response variable</label>
+        <input type="text" id="response" name="response"><br><br>
+        <label for="regressors_list">please enter your regressors' names</label>
+        <input type="text" id="regressors_list" name="regressors_list"><br><br>
+        <input type="submit" value="submit">
+        </form><br><br>
+
+        <button name="regress" type="submit" formmethod="post">run regression</button>
+    </body>
+</html>
+
+<!-- this works-->
